@@ -16,6 +16,56 @@ This package is useful for social platforms, gaming communities, forums, dashboa
 
 ---
 
+## Table of Contents
+
+- [Supported Versions](#supported-versions)
+- [Features](#features)
+- [Installation](#installation)
+- [Publish Configuration](#publish-configuration)
+- [Publish Migrations](#publish-migrations)
+- [Setup a Model](#setup-a-model)
+- [Basic Usage](#basic-usage)
+- [Send a Friend Request](#send-a-friend-request)
+- [Accept a Friend Request](#accept-a-friend-request)
+- [Deny a Friend Request](#deny-a-friend-request)
+- [Remove a Friend](#remove-a-friend)
+- [Block a Model](#block-a-model)
+- [Unblock a Model](#unblock-a-model)
+- [Checking Friendship Status](#checking-friendship-status)
+  - [Check if Two Models Are Friends](#check-if-two-models-are-friends)
+  - [Check if a User Has a Pending Friend Request From Another User](#check-if-a-user-has-a-pending-friend-request-from-another-user)
+  - [Check if a User Has Sent a Friend Request](#check-if-a-user-has-sent-a-friend-request)
+  - [Check if a User Has Blocked Another User](#check-if-a-user-has-blocked-another-user)
+  - [Check if a User Is Blocked By Another User](#check-if-a-user-is-blocked-by-another-user)
+- [Retrieving Friendships](#retrieving-friendships)
+  - [Get a Single Friendship](#get-a-single-friendship)
+  - [Get All Friendships](#get-all-friendships)
+  - [Get Pending Friendships](#get-pending-friendships)
+  - [Get Accepted Friendships](#get-accepted-friendships)
+  - [Get Denied Friendships](#get-denied-friendships)
+  - [Get Blocked Friendships](#get-blocked-friendships)
+  - [Get Friend Requests](#get-friend-requests)
+- [Retrieving Friends](#retrieving-friends)
+  - [Get Friends Collection](#get-friends-collection)
+  - [Get Friends With Pagination](#get-friends-with-pagination)
+- [Friend Groups](#friend-groups)
+  - [Add a Friend to a Group](#add-a-friend-to-a-group)
+  - [Remove a Friend From a Specific Group](#remove-a-friend-from-a-specific-group)
+  - [Remove a Friend From All Groups](#remove-a-friend-from-all-groups)
+- [Example Controller Usage](#example-controller-usage)
+- [Example Routes](#example-routes)
+- [Example Blade Usage](#example-blade-usage)
+  - [Send Friend Request Button](#send-friend-request-button)
+  - [Accept or Deny Friend Request Buttons](#accept-or-deny-friend-request-buttons)
+  - [Remove Friend Button](#remove-friend-button)
+  - [Block User Button](#block-user-button)
+- [Common Friendship Flow](#common-friendship-flow)
+- [Notes](#notes)
+- [Testing](#testing)
+- [License](#license)
+
+---
+
 ## Supported Versions
 
 | Package Version | PHP | Laravel / Illuminate |
@@ -827,4 +877,4 @@ composer test
 
 ## License
 
-This package is open-sourced software licensed under the MIT License.
+This package is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
