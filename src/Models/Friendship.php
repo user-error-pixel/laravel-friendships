@@ -1,13 +1,13 @@
 <?php
 
-namespace QuadArena\Friendships\Models;
+namespace PixelError\Friendships\Models;
 
-use QuadArena\Friendships\Status;
+use PixelError\Friendships\Status;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Friendship
- * @package QuadArena\Friendships\Models
+ * @package PixelError\Friendships\Models
  */
 class Friendship extends Model
 {

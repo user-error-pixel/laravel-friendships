@@ -1,12 +1,12 @@
 <?php
 
-namespace QuadArena\Friendships\Models;
+namespace PixelError\Friendships\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class FriendFriendshipGroups
- * @package QuadArena\Friendships\Models
+ * @package PixelError\Friendships\Models
  */
 class FriendFriendshipGroups extends Model
 {

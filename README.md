@@ -1,4 +1,4 @@
-# QuadArena Laravel Friendships
+# PixelError Laravel Friendships
 
 This package gives Eloquent models the ability to manage friendships.
 You can build friend requests, accepted friendships, blocks, and friend groups.
@@ -23,14 +23,14 @@ You can build friend requests, accepted friendships, blocks, and friend groups.
 Install the package through Composer.
 
 ```bash
-composer require quadarena/laravel-friendships
+composer require user-pixel-error/laravel-friendships
 ```
 
 Laravel will auto-discover the service provider. Publish the config and migrations when you are ready to customize the table names or groups.
 
 ```bash
-php artisan vendor:publish --provider="QuadArena\Friendships\FriendshipsServiceProvider" --tag="friendships-config"
-php artisan vendor:publish --provider="QuadArena\Friendships\FriendshipsServiceProvider" --tag="friendships-migrations"
+php artisan vendor:publish --provider="PixelError\Friendships\FriendshipsServiceProvider" --tag="friendships-config"
+php artisan vendor:publish --provider="PixelError\Friendships\FriendshipsServiceProvider" --tag="friendships-migrations"
 php artisan migrate
 ```
 
@@ -43,7 +43,7 @@ config/friendships.php
 ## Setup a Model
 ```php
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use QuadArena\Friendships\Traits\Friendable;
+use PixelError\Friendships\Traits\Friendable;
 
 class User extends Authenticatable
 {
@@ -53,7 +53,7 @@ class User extends Authenticatable
 ```
 
 ## How to use
-[Check the Test file to see the package in action](https://github.com/quadarena/laravel-friendships/blob/master/tests/FriendshipsTest.php)
+[Check the Test file to see the package in action](https://github.com/user-pixel-error/laravel-friendships/blob/master/tests/FriendshipsTest.php)
 
 #### Send a Friend Request
 ```php

@@ -12,12 +12,10 @@ return new class extends Migration
             $table->unsignedBigInteger('friendship_id');
             $table->morphs('friend');
             $table->unsignedInteger('group_id');
-
             $table->foreign('friendship_id')
                 ->references('id')
                 ->on(config('friendships.tables.fr_pivot', 'friendships'))
                 ->cascadeOnDelete();
-
             $table->unique(
                 ['friendship_id', 'friend_id', 'friend_type', 'group_id'],
                 'friendship_group_unique'

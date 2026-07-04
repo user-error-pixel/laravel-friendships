@@ -1,5 +1,5 @@
 {
-    "name": "quadarena/laravel-friendships",
+    "name": "user-pixel-error/laravel-friendships",
     "description": "This package gives Eloquent models the ability to manage their friendships.",
     "keywords": [
         "laravel",
@@ -11,7 +11,12 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "QuadArena"
+            "name": "Alex Kyriakidis",
+            "email": "hootlex@icloud.com"
+        },
+        {
+            "name": "Nicholas English",
+            "email": "nenglish443@gmail.com"
         }
     ],
     "require": {
@@ -28,7 +33,7 @@
     },
     "autoload": {
         "psr-4": {
-            "QuadArena\\Friendships\\": "src/"
+            "PixelError\\Friendships\\": "src/"
         }
     },
     "autoload-dev": {
@@ -45,7 +50,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "QuadArena\\Friendships\\FriendshipsServiceProvider"
+                "PixelError\\Friendships\\FriendshipsServiceProvider"
             ]
         }
     },

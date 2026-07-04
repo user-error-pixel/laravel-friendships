@@ -14,7 +14,6 @@ return new class extends Migration
             $table->morphs('recipient');
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
-
             $table->index(['sender_id', 'sender_type', 'status'], 'friendships_sender_status_index');
             $table->index(['recipient_id', 'recipient_type', 'status'], 'friendships_recipient_status_index');
         });

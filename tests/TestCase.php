@@ -5,7 +5,7 @@ namespace Tests;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use QuadArena\Friendships\FriendshipsServiceProvider;
+use PixelError\Friendships\FriendshipsServiceProvider;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -24,7 +24,6 @@ abstract class TestCase extends BaseTestCase
             'database' => ':memory:',
             'prefix' => '',
         ]);
-
         $app['config']->set('friendships.tables.fr_pivot', 'friendships');
         $app['config']->set('friendships.tables.fr_groups_pivot', 'friend_friendship_groups');
         $app['config']->set('friendships.groups', [
@@ -37,7 +36,6 @@ abstract class TestCase extends BaseTestCase
     protected function setUp(): void
     {
         parent::setUp();
-
         $this->setUpDatabase();
     }
 
@@ -46,7 +44,6 @@ abstract class TestCase extends BaseTestCase
         Schema::dropIfExists('friend_friendship_groups');
         Schema::dropIfExists('friendships');
         Schema::dropIfExists('users');
-
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -55,7 +52,6 @@ abstract class TestCase extends BaseTestCase
             $table->rememberToken();
             $table->timestamps();
         });
-
         Schema::create('friendships', function (Blueprint $table) {
             $table->id();
             $table->morphs('sender');
@@ -63,17 +59,14 @@ abstract class TestCase extends BaseTestCase
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
-
         Schema::create('friend_friendship_groups', function (Blueprint $table) {
             $table->unsignedBigInteger('friendship_id');
             $table->morphs('friend');
             $table->unsignedInteger('group_id');
-
             $table->foreign('friendship_id')
                 ->references('id')
                 ->on('friendships')
                 ->cascadeOnDelete();
-
             $table->unique(
                 ['friendship_id', 'friend_id', 'friend_type', 'group_id'],
                 'friendship_group_unique'
