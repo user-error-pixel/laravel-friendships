@@ -1,13 +1,12 @@
 <?php
 
-namespace Hootlex\Friendships\Models;
+namespace QuadArena\Friendships\Models;
 
-use Hootlex\Friendships\Status;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class FriendFriendshipGroups
- * @package Hootlex\Friendships\Models
+ * @package QuadArena\Friendships\Models
  */
 class FriendFriendshipGroups extends Model
 {
@@ -25,7 +24,7 @@ class FriendFriendshipGroups extends Model
     /**
      * @param array $attributes
      */
-    public function __construct(array $attributes = array())
+    public function __construct(array $attributes = [])
     {
         $this->table = config('friendships.tables.fr_groups_pivot');
 

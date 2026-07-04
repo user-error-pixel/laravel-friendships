@@ -2,19 +2,15 @@
 
 namespace Tests;
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use PHPUnit\Framework\Attributes\Test;
 
 /*
  * Test User Personal Friend Groups
 */
 class FriendshipsGroupsTest extends TestCase
 {
-    use DatabaseTransactions;
-    
-    
     /** @test */
+    #[Test]
     public function user_can_add_a_friend_to_a_group()
     {
         
@@ -40,6 +36,7 @@ class FriendshipsGroupsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function user_cannot_add_a_non_friend_to_a_group()
     {
         $sender   = createUser();
@@ -50,6 +47,7 @@ class FriendshipsGroupsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function user_can_remove_a_friend_from_group()
     {
         $sender    = createUser();
@@ -71,6 +69,7 @@ class FriendshipsGroupsTest extends TestCase
     }
 
     /** @test */
+    #[Test]
     public function user_cannot_remove_a_non_existing_friend_from_group()
     {
         $sender     = createUser();
@@ -84,6 +83,7 @@ class FriendshipsGroupsTest extends TestCase
     }
 
     /** @test */
+    #[Test]
     public function user_can_remove_a_friend_from_all_groups()
     {
         $sender    = createUser();
@@ -102,6 +102,7 @@ class FriendshipsGroupsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function it_returns_friends_of_a_group()
     {
         $sender     = createUser();
@@ -124,6 +125,7 @@ class FriendshipsGroupsTest extends TestCase
 
 
     /** @test */
+    #[Test]
     public function it_returns_all_user_friendships_by_group()
     {
         $sender     = createUser();
@@ -160,6 +162,7 @@ class FriendshipsGroupsTest extends TestCase
 
 
     /** @test */
+    #[Test]
     public function it_returns_accepted_user_friendships_by_group()
     {
         $sender     = createUser();
@@ -181,6 +184,7 @@ class FriendshipsGroupsTest extends TestCase
     }
 
     /** @test */
+    #[Test]
     public function it_returns_accepted_user_friendships_number_by_group()
     {
         $sender     = createUser();
@@ -202,6 +206,7 @@ class FriendshipsGroupsTest extends TestCase
 
 
     /** @test */
+    #[Test]
     public function it_returns_user_friends_by_group_per_page()
     {
         $sender     = createUser();

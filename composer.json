@@ -1,47 +1,54 @@
 {
-    "name": "hootlex/laravel-friendships",
+    "name": "quadarena/laravel-friendships",
     "description": "This package gives Eloquent models the ability to manage their friendships.",
-    "keywords": ["laravel", "friendships", "friend-system", "friends", "eloquent"],
+    "keywords": [
+        "laravel",
+        "friendships",
+        "friend-system",
+        "friends",
+        "eloquent"
+    ],
     "license": "MIT",
     "authors": [
         {
-            "name": "Hootlex",
-            "email": "hootlex@icloud.com"
+            "name": "QuadArena"
         }
     ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/database": "^12.0 || ^13.0",
+        "illuminate/events": "^12.0 || ^13.0",
+        "illuminate/pagination": "^12.0 || ^13.0",
+        "illuminate/support": "^12.0 || ^13.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.6",
+        "orchestra/testbench": "^10.0 || ^11.0",
+        "phpunit/phpunit": "^11.5 || ^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "QuadArena\\Friendships\\": "src/"
+        }
+    },
     "autoload-dev": {
-        "classmap": [
-            "vendor/laravel/laravel/tests/TestCase.php"
-        ],
         "files": [
             "tests/helpers.php"
+        ],
+        "classmap": [
+            "tests/Stub_User.php"
         ],
         "psr-4": {
             "Tests\\": "tests/"
         }
     },
-    "require": {
-        "php": ">=5.4.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit" : "5.*",
-        "fzaninotto/faker": "~1.4",
-        "laravel/laravel": "5.*",
-        "codeclimate/php-test-reporter": "^0.3.2",
-        "mockery/mockery": "^0.9.5",
-        "doctrine/dbal": "^2.5"
-    },
-    "autoload": {
-        "psr-4": {
-            "Hootlex\\Friendships\\": "src/"
-        }
-    },
     "extra": {
         "laravel": {
             "providers": [
-                "Hootlex\\Friendships\\FriendshipsServiceProvider"
+                "QuadArena\\Friendships\\FriendshipsServiceProvider"
             ]
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }

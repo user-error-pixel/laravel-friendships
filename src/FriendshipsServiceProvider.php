@@ -1,43 +1,37 @@
 <?php
 
-namespace Hootlex\Friendships;
+namespace QuadArena\Friendships;
 
 use Illuminate\Support\ServiceProvider;
 
 class FriendshipsServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any application services.
-     *
-     * @return void
+     * Register package services.
      */
-    public function boot()
+    public function register(): void
     {
-
-        if (class_exists('CreateFriendshipsTable') || class_exists('CreateFriendshipsGroupsTable')) {
-            return;
-        }
-
-        $stub      = __DIR__ . '/database/migrations/';
-        $target    = database_path('migrations') . '/';
-
-        $this->publishes([
-            $stub . 'create_friendships_table.php'        => $target . date('Y_m_d_His', time()) . '_create_friendships_table.php',
-            $stub . 'create_friendships_groups_table.php' => $target . date('Y_m_d_His', time() + 1) . '_create_friendships_groups_table.php'
-        ], 'migrations');
-
-        $this->publishes([
-            __DIR__ . '/config/friendships.php' => config_path('friendships.php'),
-        ], 'config');
-
+        $this->mergeConfigFrom(__DIR__ . '/config/friendships.php', 'friendships');
     }
 
     /**
-     * Register any application services.
-     *
-     * @return void
+     * Bootstrap package services.
      */
-    public function register()
+    public function boot(): void
     {
+        if (! $this->app->runningInConsole()) {
+            return;
+        }
+
+        $timestamp = date('Y_m_d_His');
+
+        $this->publishes([
+            __DIR__ . '/database/migrations/create_friendships_table.php' => database_path("migrations/{$timestamp}_create_friendships_table.php"),
+            __DIR__ . '/database/migrations/create_friendships_groups_table.php' => database_path('migrations/' . date('Y_m_d_His', strtotime('+1 second')) . '_create_friendships_groups_table.php'),
+        ], 'friendships-migrations');
+
+        $this->publishes([
+            __DIR__ . '/config/friendships.php' => config_path('friendships.php'),
+        ], 'friendships-config');
     }
 }

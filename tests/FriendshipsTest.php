@@ -2,15 +2,12 @@
 
 namespace Tests;
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use PHPUnit\Framework\Attributes\Test;
 
 class FriendshipsTest extends TestCase
 {
-    // use DatabaseTransactions;
-    
     /** @test */
+    #[Test]
     public function user_can_send_a_friend_request()
     {
         $sender    = createUser();
@@ -22,6 +19,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function user_can_not_send_a_friend_request_if_frienship_is_pending()
     {
         $sender    = createUser();
@@ -35,6 +33,7 @@ class FriendshipsTest extends TestCase
     
     
     /** @test */
+    #[Test]
     public function user_can_send_a_friend_request_if_frienship_is_denied()
     {
         $sender    = createUser();
@@ -49,6 +48,7 @@ class FriendshipsTest extends TestCase
     }
 
     /** @test */
+    #[Test]
     public function user_can_remove_a_friend_request()
     {
         $sender    = createUser();
@@ -72,6 +72,7 @@ class FriendshipsTest extends TestCase
     }
 
     /** @test */
+    #[Test]
     public function user_is_friend_with_another_user_if_accepts_a_friend_request()
     {
         $sender    = createUser();
@@ -88,6 +89,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function user_is_not_friend_with_another_user_until_he_accepts_a_friend_request()
     {
         $sender    = createUser();
@@ -100,6 +102,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function user_has_friend_request_from_another_user_if_he_received_a_friend_request()
     {
         $sender    = createUser();
@@ -112,6 +115,7 @@ class FriendshipsTest extends TestCase
     }
 
     /** @test */
+    #[Test]
     public function user_has_sent_friend_request_to_this_user_if_he_already_sent_request()
     {
         $sender    = createUser();
@@ -124,6 +128,7 @@ class FriendshipsTest extends TestCase
     }
 
     /** @test */
+    #[Test]
     public function user_has_not_friend_request_from_another_user_if_he_accepted_the_friend_request()
     {
         $sender    = createUser();
@@ -138,6 +143,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function user_cannot_accept_his_own_friend_request()
     {
         $sender    = createUser();
@@ -151,6 +157,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function user_can_deny_a_friend_request()
     {
         $sender    = createUser();
@@ -167,6 +174,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function user_can_block_another_user()
     {
         $sender    = createUser();
@@ -182,6 +190,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function user_can_unblock_a_blocked_user()
     {
         $sender    = createUser();
@@ -195,6 +204,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function user_block_is_permanent_unless_blocker_decides_to_unblock()
     {
         $sender    = createUser();
@@ -221,6 +231,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function user_can_send_friend_request_to_user_who_is_blocked()
     {
         $sender    = createUser();
@@ -234,6 +245,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function it_returns_all_user_friendships()
     {
         $sender     = createUser();
@@ -250,6 +262,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function it_returns_accepted_user_friendships_number()
     {
         $sender     = createUser();
@@ -266,6 +279,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function it_returns_accepted_user_friendships()
     {
         $sender     = createUser();
@@ -282,6 +296,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function it_returns_only_accepted_user_friendships()
     {
         $sender     = createUser();
@@ -303,6 +318,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function it_returns_pending_user_friendships()
     {
         $sender     = createUser();
@@ -317,6 +333,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function it_returns_denied_user_friendships()
     {
         $sender     = createUser();
@@ -333,6 +350,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function it_returns_blocked_user_friendships()
     {
         $sender     = createUser();
@@ -349,6 +367,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function it_returns_user_friends()
     {
         $sender     = createUser();
@@ -371,6 +390,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function it_returns_user_friends_per_page()
     {
         $sender     = createUser();
@@ -398,6 +418,7 @@ class FriendshipsTest extends TestCase
     }
     
     /** @test */
+    #[Test]
     public function it_returns_user_friends_of_friends()
     {
         $sender     = createUser();
@@ -425,6 +446,7 @@ class FriendshipsTest extends TestCase
     }
 
     /** @test */
+    #[Test]
     public function it_returns_user_mutual_friends()
     {
         $sender     = createUser();
@@ -454,6 +476,7 @@ class FriendshipsTest extends TestCase
     }
 
     /** @test */
+    #[Test]
     public function it_returns_user_mutual_friends_per_page()
     {
         $sender     = createUser();
@@ -486,6 +509,7 @@ class FriendshipsTest extends TestCase
     }
 
     /** @test */
+    #[Test]
     public function it_returns_user_mutual_friends_number()
     {
         $sender     = createUser();

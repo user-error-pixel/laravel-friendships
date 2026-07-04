@@ -2,21 +2,10 @@
 
 namespace Tests;
 
-use Illuminate\Contracts\Console\Kernel;
-
+/**
+ * Kept for backwards compatibility with older external test suites.
+ * This package now boots Laravel through Orchestra Testbench.
+ */
 trait CreatesApplication
 {
-    /**
-     * Creates the application.
-     *
-     * @return \Illuminate\Foundation\Application
-     */
-    public function createApplication()
-    {
-        $app = require __DIR__.'/../vendor/laravel/laravel/bootstrap/app.php';
-
-        $app->make(Kernel::class)->bootstrap();
-
-        return $app;
-    }
 }

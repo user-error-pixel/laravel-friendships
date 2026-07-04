@@ -1,35 +1,32 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-/**
- * Class CreateFriendshipsGroupsTable
- */
-class CreateFriendshipsGroupsTable extends Migration
+return new class extends Migration
 {
-
-    public function up() {
-
-        Schema::create(config('friendships.tables.fr_groups_pivot'), function (Blueprint $table) {
-
-            $table->integer('friendship_id')->unsigned();
+    public function up(): void
+    {
+        Schema::create(config('friendships.tables.fr_groups_pivot', 'friend_friendship_groups'), function (Blueprint $table) {
+            $table->unsignedBigInteger('friendship_id');
             $table->morphs('friend');
-            $table->integer('group_id')->unsigned();
+            $table->unsignedInteger('group_id');
 
             $table->foreign('friendship_id')
                 ->references('id')
-                ->on(config('friendships.tables.fr_pivot'))
-                ->onDelete('cascade');
+                ->on(config('friendships.tables.fr_pivot', 'friendships'))
+                ->cascadeOnDelete();
 
-            $table->unique(['friendship_id', 'friend_id', 'friend_type', 'group_id'], 'unique');
-
+            $table->unique(
+                ['friendship_id', 'friend_id', 'friend_type', 'group_id'],
+                'friendship_group_unique'
+            );
         });
-
     }
 
-    public function down() {
-        Schema::dropIfExists(config('friendships.tables.fr_groups_pivot'));
+    public function down(): void
+    {
+        Schema::dropIfExists(config('friendships.tables.fr_groups_pivot', 'friend_friendship_groups'));
     }
-
-}
+};

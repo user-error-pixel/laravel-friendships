@@ -1,14 +1,14 @@
 <?php
 
-namespace Hootlex\Friendships;
+namespace QuadArena\Friendships;
 
 /**
- * Class Status.
+ * Friendship status values.
  */
 class Status
 {
-    const PENDING = 0;
-    const ACCEPTED = 1;
-    const DENIED = 2;
-    const BLOCKED = 3;
+    public const PENDING = 0;
+    public const ACCEPTED = 1;
+    public const DENIED = 2;
+    public const BLOCKED = 3;
 }
