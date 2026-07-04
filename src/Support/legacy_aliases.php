@@ -28,8 +28,8 @@ class_alias(
 );
 
 class_alias(
-    PixelError\Friendships\Models\FriendshipGroup::class,
-    Hootlex\Friendships\Models\FriendshipGroup::class
+    PixelError\Friendships\Models\FriendshipGroups::class,
+    Hootlex\Friendships\Models\FriendshipGroups::class
 );
 
 class_alias(
