@@ -14,6 +14,7 @@ class FriendshipGroup extends Model
     ];
 
     public $timestamps = false;
+
     public function __construct(array $attributes = [])
     {
         $this->table = config('friendships.tables.fr_groups_pivot');

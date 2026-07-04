@@ -13,35 +13,35 @@
 |
 */
 
-if (!class_exists('Hootlex\\Friendships\\FriendshipsServiceProvider', false)) {
+if (! class_exists('Hootlex\\Friendships\\FriendshipsServiceProvider', false)) {
     class_alias(
         PixelError\Friendships\FriendshipsServiceProvider::class,
         'Hootlex\\Friendships\\FriendshipsServiceProvider'
     );
 }
 
-if (!class_exists('Hootlex\\Friendships\\Status', false)) {
+if (! class_exists('Hootlex\\Friendships\\Status', false)) {
     class_alias(
         PixelError\Friendships\Status::class,
         'Hootlex\\Friendships\\Status'
     );
 }
 
-if (!class_exists('Hootlex\\Friendships\\Models\\Friendship', false)) {
+if (! class_exists('Hootlex\\Friendships\\Models\\Friendship', false)) {
     class_alias(
         PixelError\Friendships\Models\Friendship::class,
         'Hootlex\\Friendships\\Models\\Friendship'
     );
 }
 
-if (!class_exists('Hootlex\\Friendships\\Models\\FriendshipGroup', false)) {
+if (! class_exists('Hootlex\\Friendships\\Models\\FriendshipGroup', false)) {
     class_alias(
         PixelError\Friendships\Models\FriendshipGroup::class,
         'Hootlex\\Friendships\\Models\\FriendshipGroup'
     );
 }
 
-if (!class_exists('Hootlex\\Friendships\\Models\\FriendFriendshipGroups', false)) {
+if (! class_exists('Hootlex\\Friendships\\Models\\FriendFriendshipGroups', false)) {
     class_alias(
         PixelError\Friendships\Models\FriendFriendshipGroups::class,
         'Hootlex\\Friendships\\Models\\FriendFriendshipGroups'
