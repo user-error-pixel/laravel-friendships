@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  phpunit:
+  quality:
     runs-on: ubuntu-latest
 
     strategy:
@@ -41,6 +41,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
+          extensions: mbstring, sqlite3
 
       - name: Pin Laravel test dependencies
         run: |
@@ -58,6 +59,12 @@ jobs:
 
       - name: Validate composer.json
         run: composer validate --strict
+
+      - name: Check code style
+        run: vendor/bin/pint --test
+
+      - name: Run static analysis
+        run: vendor/bin/phpstan analyse --no-progress
 
       - name: Run tests
         run: vendor/bin/phpunit

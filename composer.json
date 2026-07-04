@@ -11,12 +11,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Alex Kyriakidis",
-            "email": "hootlex@icloud.com"
-        },
-        {
-            "name": "Nicholas English",
-            "email": "nenglish443@gmail.com"
+            "name": "PixelError"
         }
     ],
     "require": {
@@ -29,7 +24,9 @@
     "require-dev": {
         "mockery/mockery": "^1.6",
         "orchestra/testbench": "^10.0 || ^11.0",
-        "phpunit/phpunit": "^11.5 || ^12.0"
+        "phpunit/phpunit": "^11.5 || ^12.0",
+        "laravel/pint": "^1.0",
+        "larastan/larastan": "^3.0"
     },
     "autoload": {
         "psr-4": {
@@ -58,5 +55,16 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "scripts": {
+        "format": "pint",
+        "format:test": "pint --test",
+        "analyse": "phpstan analyse",
+        "test": "phpunit",
+        "ci": [
+            "@format:test",
+            "@analyse",
+            "@test"
+        ]
+    }
 }

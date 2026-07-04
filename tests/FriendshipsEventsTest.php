@@ -13,6 +13,7 @@ class FriendshipsEventsTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
         $this->sender = createUser();
         $this->recipient = createUser();
     }
@@ -21,7 +22,9 @@ class FriendshipsEventsTest extends TestCase
     public function friend_request_is_sent(): void
     {
         Event::fake();
+
         $this->sender->befriend($this->recipient);
+
         Event::assertDispatched('friendships.sent');
     }
 
@@ -30,7 +33,9 @@ class FriendshipsEventsTest extends TestCase
     {
         $this->sender->befriend($this->recipient);
         Event::fake();
+
         $this->recipient->acceptFriendRequest($this->sender);
+
         Event::assertDispatched('friendships.accepted');
     }
 
@@ -39,7 +44,9 @@ class FriendshipsEventsTest extends TestCase
     {
         $this->sender->befriend($this->recipient);
         Event::fake();
+
         $this->recipient->denyFriendRequest($this->sender);
+
         Event::assertDispatched('friendships.denied');
     }
 
@@ -49,7 +56,9 @@ class FriendshipsEventsTest extends TestCase
         $this->sender->befriend($this->recipient);
         $this->recipient->acceptFriendRequest($this->sender);
         Event::fake();
+
         $this->recipient->blockFriend($this->sender);
+
         Event::assertDispatched('friendships.blocked');
     }
 
@@ -60,7 +69,9 @@ class FriendshipsEventsTest extends TestCase
         $this->recipient->acceptFriendRequest($this->sender);
         $this->recipient->blockFriend($this->sender);
         Event::fake();
+
         $this->recipient->unblockFriend($this->sender);
+
         Event::assertDispatched('friendships.unblocked');
     }
 
@@ -70,7 +81,9 @@ class FriendshipsEventsTest extends TestCase
         $this->sender->befriend($this->recipient);
         $this->recipient->acceptFriendRequest($this->sender);
         Event::fake();
+
         $this->recipient->unfriend($this->sender);
+
         Event::assertDispatched('friendships.cancelled');
     }
 }

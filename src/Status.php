@@ -2,6 +2,9 @@
 
 namespace PixelError\Friendships;
 
+/**
+ * Friendship status values.
+ */
 class Status
 {
     public const PENDING = 0;

@@ -2,33 +2,13 @@
 
 namespace PixelError\Friendships\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
- * Class FriendFriendshipGroups
- * @package PixelError\Friendships\Models
+ * @deprecated Use {@see FriendshipGroup} instead.
+ *
+ * This class is kept for backwards compatibility with older applications
+ * and older package internals that referenced the original model name.
  */
-class FriendFriendshipGroups extends Model
+class FriendFriendshipGroups extends FriendshipGroup
 {
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['friendship_id', 'group_id', 'friend_id', 'friend_type'];
-
-    /**
-     * @var bool
-     */
-    public $timestamps = false;
-
-    /**
-     * @param array $attributes
-     */
-    public function __construct(array $attributes = [])
-    {
-        $this->table = config('friendships.tables.fr_groups_pivot');
-
-        parent::__construct($attributes);
-    }
-
+    // Backwards compatibility alias class.
 }
