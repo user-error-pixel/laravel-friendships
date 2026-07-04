@@ -11,7 +11,12 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "PixelError"
+            "name": "Alex Kyriakidis",
+            "email": "hootlex@icloud.com"
+        },
+        {
+            "name": "Nicholas English",
+            "email": "nenglish443@gmail.com"
         }
     ],
     "require": {
