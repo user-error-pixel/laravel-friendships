@@ -15,8 +15,8 @@ function createUser(array $overrides = [], int $amount = 1)
         $unique = (string) Str::uuid();
 
         return User::query()->create(array_merge([
-            'name'     => 'Test User',
-            'email'    => "user-{$unique}@example.test",
+            'name' => 'Test User',
+            'email' => "user-{$unique}@example.test",
             'password' => bcrypt('password'),
         ], $overrides));
     });

@@ -29,7 +29,7 @@ class FriendshipGroup extends Model
     /**
      * Create a new friendship group model instance.
      *
-     * @param array<string, mixed> $attributes
+     * @param  array<string, mixed>  $attributes
      */
     public function __construct(array $attributes = [])
     {
