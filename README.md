@@ -1,3 +1,5 @@
+[![tests](https://github.com/user-error-pixel/laravel-friendships/actions/workflows/tests.yml/badge.svg)](https://github.com/user-error-pixel/laravel-friendships/actions/workflows/tests.yml)
+
 # PixelError Laravel Friendships
 
 This package gives Eloquent models the ability to manage friendships.
@@ -51,9 +53,6 @@ class User extends Authenticatable
     // ...
 }
 ```
-
-## How to use
-[Check the Test file to see the package in action](https://github.com/user-pixel-error/laravel-friendships/blob/master/tests/FriendshipsTest.php)
 
 #### Send a Friend Request
 ```php
