@@ -34,7 +34,10 @@
     "autoload": {
         "psr-4": {
             "PixelError\\Friendships\\": "src/"
-        }
+        },
+        "files": [
+            "src/Support/legacy_aliases.php"
+        ]
     },
     "autoload-dev": {
         "files": [
