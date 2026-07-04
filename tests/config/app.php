@@ -1,6 +1,7 @@
 <?php
-return array(
-    'providers' => append_config(array(
-        'PixelError\Friendships\FriendshipsServiceProvider'
-    )),
-);
+
+return [
+    'providers' => append_config([
+        'PixelError\Friendships\FriendshipsServiceProvider',
+    ]),
+];

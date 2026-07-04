@@ -8,6 +8,7 @@ use PHPUnit\Framework\Attributes\Test;
 class FriendshipsEventsTest extends TestCase
 {
     protected $sender;
+
     protected $recipient;
 
     protected function setUp(): void
