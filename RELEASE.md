@@ -1,85 +1,92 @@
 # Release Notes
 
-## PixelError Laravel Friendships
+## v1.0.1 - Legacy Namespace Compatibility
 
-This release focuses on modernizing the package for newer Laravel applications, mainly by upgrading compatibility for **Laravel 12** and **Laravel 13** while keeping support for **PHP 8.2+**.
+This release adds backwards compatibility support for applications that are still using the original `Hootlex\Friendships` namespace.
+
+The package now supports the newer `PixelError\Friendships` namespace while allowing older projects to continue using the legacy namespace during migration.
 
 ---
 
 ## Release Summary
 
-This update brings the package forward from its older Laravel compatibility target and prepares it for current Laravel projects.
+Version `v1.0.1` is a compatibility release focused on making the package easier to adopt for existing applications.
 
-Main goals:
+Some projects may still have imports like:
 
-- Support Laravel 12
-- Support Laravel 13
-- Support PHP 8.2+
-- Modernize package metadata
-- Keep the friendship API familiar
-- Make installation and usage clearer for new projects
+```php
+use Hootlex\Friendships\Traits\Friendable;
+```
 
----
+This release adds legacy aliases so those applications do not need to immediately replace every old namespace reference.
 
-## Compatibility
+New projects should still use the new namespace:
 
-| Package Version | PHP | Laravel / Illuminate |
-| --- | --- | --- |
-| Current | `^8.2` | `^12.0 || ^13.0` |
-
-### Notes
-
-Laravel 12 supports PHP 8.2 and newer.
-
-Laravel 13 requires a newer PHP version than Laravel 12. Composer will resolve the correct version based on the PHP version used by your project.
-
----
-
-## What Changed
-
-### Laravel 12 Support
-
-The package now supports Laravel 12 applications.
-
-This means the package can be installed in Laravel 12 projects using modern Illuminate components.
-
-```json
-"illuminate/support": "^12.0 || ^13.0"
+```php
+use PixelError\Friendships\Traits\Friendable;
 ```
 
 ---
 
-### Laravel 13 Support
+## Added
 
-The package now supports Laravel 13 applications.
-
-This allows newer Laravel projects to use the same friendship system without needing to stay on an older framework version.
-
----
-
-### PHP 8.2+ Support
-
-The package now supports PHP 8.2 and newer.
-
-```json
-"php": "^8.2"
-```
-
-This makes the package usable in Laravel 12 applications running PHP 8.2, while still allowing newer PHP versions for Laravel 13 projects.
+- Added legacy namespace compatibility for `Hootlex\Friendships`.
+- Added aliases for old class references.
+- Added support for old applications still importing the original namespace.
+- Added a smoother migration path from the original package to this maintained fork.
 
 ---
 
-## Namespace / Package Branding
+## Legacy Namespace Aliases
 
-The package has been updated under the PixelError package name.
+The following legacy aliases are supported:
 
-Use the package with:
+```php
+class_alias(
+    PixelError\Friendships\FriendshipsServiceProvider::class,
+    Hootlex\Friendships\FriendshipsServiceProvider::class
+);
 
-```bash
-composer require user-pixel-error/laravel-friendships
+class_alias(
+    PixelError\Friendships\Status::class,
+    Hootlex\Friendships\Status::class
+);
+
+class_alias(
+    PixelError\Friendships\Models\Friendship::class,
+    Hootlex\Friendships\Models\Friendship::class
+);
+
+class_alias(
+    PixelError\Friendships\Models\FriendshipGroup::class,
+    Hootlex\Friendships\Models\FriendshipGroup::class
+);
+
+class_alias(
+    PixelError\Friendships\Traits\Friendable::class,
+    Hootlex\Friendships\Traits\Friendable::class
+);
 ```
 
-Use the trait with:
+---
+
+## Why This Matters
+
+Existing applications may still use the original package namespace:
+
+```php
+use Hootlex\Friendships\Traits\Friendable;
+```
+
+Without compatibility aliases, those projects would need to manually update every import before switching to this fork.
+
+With this release, older projects can upgrade more safely while still having time to migrate to the new namespace.
+
+---
+
+## Recommended New Namespace
+
+New projects should use:
 
 ```php
 use PixelError\Friendships\Traits\Friendable;
@@ -99,220 +106,107 @@ class User extends Authenticatable
 
 ---
 
-## Existing API
+## Legacy Namespace Still Supported
 
-The main friendship API remains familiar.
-
-Examples:
+Existing projects may continue using:
 
 ```php
-$user->befriend($recipient);
-
-$user->acceptFriendRequest($sender);
-
-$user->denyFriendRequest($sender);
-
-$user->unfriend($friend);
-
-$user->blockFriend($friend);
-
-$user->unblockFriend($friend);
+use Hootlex\Friendships\Traits\Friendable;
 ```
 
-Friendship checks:
+Example:
 
 ```php
-$user->isFriendWith($friend);
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Hootlex\Friendships\Traits\Friendable;
 
-$user->hasFriendRequestFrom($sender);
-
-$user->hasSentFriendRequestTo($recipient);
-
-$user->hasBlocked($friend);
-
-$user->isBlockedBy($friend);
+class User extends Authenticatable
+{
+    use Friendable;
+}
 ```
 
-Friendship retrieval:
+This is intended as a migration bridge, not the preferred namespace for new applications.
 
-```php
-$user->getAllFriendships();
+---
 
-$user->getPendingFriendships();
+## Composer Autoload Requirement
 
-$user->getAcceptedFriendships();
+The legacy alias file should be loaded through Composer's `files` autoload section.
 
-$user->getDeniedFriendships();
+Example:
 
-$user->getBlockedFriendships();
-
-$user->getFriendRequests();
-
-$user->getFriends();
+```json
+{
+    "autoload": {
+        "psr-4": {
+            "PixelError\\Friendships\\": "src/"
+        },
+        "files": [
+            "src/Support/legacy_aliases.php"
+        ]
+    }
+}
 ```
 
-Friend groups:
+After updating Composer autoloading, run:
 
-```php
-$user->groupFriend($friend, 'close_friends');
-
-$user->ungroupFriend($friend, 'close_friends');
-
-$user->ungroupFriend($friend);
+```bash
+composer dump-autoload
 ```
 
 ---
 
-## Installation
+## Compatibility
 
-Install the package:
-
-```bash
-composer require user-pixel-error/laravel-friendships
-```
-
-Publish the config:
-
-```bash
-php artisan vendor:publish --provider="PixelError\Friendships\FriendshipsServiceProvider" --tag="friendships-config"
-```
-
-Publish the migrations:
-
-```bash
-php artisan vendor:publish --provider="PixelError\Friendships\FriendshipsServiceProvider" --tag="friendships-migrations"
-```
-
-Run migrations:
-
-```bash
-php artisan migrate
-```
+| PHP | Laravel / Illuminate |
+| --- | --- |
+| PHP 8.2+ | Laravel 12 |
+| PHP 8.3+ | Laravel 12 / 13 |
 
 ---
 
 ## Upgrade Notes
 
-### From Older Laravel Versions
+If you are already using the new namespace, no code changes are required.
 
-If you are upgrading an existing project, check the following:
-
-1. Make sure your project is running PHP 8.2 or newer.
-2. Make sure your Laravel version is 12 or 13.
-3. Update Composer dependencies.
-4. Republish package config or compare your existing config with the latest version.
-5. Run your application test suite.
-
----
-
-## Composer Update Example
-
-```bash
-composer update user-pixel-error/laravel-friendships
-```
-
-Or update all dependencies:
-
-```bash
-composer update
-```
-
----
-
-## Configuration
-
-The package config is published to:
-
-```text
-config/friendships.php
-```
-
-Default config:
+If your application still uses the old namespace, this release should allow those imports to continue working:
 
 ```php
-<?php
+use Hootlex\Friendships\Traits\Friendable;
+use Hootlex\Friendships\Status;
+```
 
-return [
+You can migrate to the new namespace gradually:
 
-    /*
-    |--------------------------------------------------------------------------
-    | Friendship Tables
-    |--------------------------------------------------------------------------
-    |
-    | These table names are used by the package to store friendship data.
-    | You can change these values if your application uses different table names.
-    |
-    */
-
-    'tables' => [
-
-        // Stores the main friendship relationships between users.
-        'fr_pivot' => 'friendships',
-
-        // Stores which friendship groups a user has assigned to their friends.
-        'fr_groups_pivot' => 'user_friendship_groups',
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Friendship Groups
-    |--------------------------------------------------------------------------
-    |
-    | These are the default friendship groups available in the package.
-    | The numeric values are stored in the database, so avoid changing them
-    | after users have already started using groups.
-    |
-    */
-
-    'groups' => [
-
-        // General friends or people the user knows casually.
-        'acquaintances' => 0,
-
-        // Friends the user considers closer than normal acquaintances.
-        'close_friends' => 1,
-
-        // Friends marked as family members.
-        'family' => 2,
-    ],
-
-];
+```php
+use PixelError\Friendships\Traits\Friendable;
+use PixelError\Friendships\Status;
 ```
 
 ---
 
-## Testing
+## Testing Recommended
 
-Run the package tests with:
+Before using this release in production, test:
 
-```bash
-vendor/bin/phpunit
-```
-
-If your project has a Composer test script:
-
-```bash
-composer test
-```
-
----
-
-## Recommended Before Production
-
-Before using this release in production:
-
-- Run your test suite.
-- Test friend request creation.
-- Test accepting and denying requests.
-- Test blocking and unblocking.
-- Test friend groups.
-- Test migrations on a local or staging database.
-- Confirm your app handles duplicate requests and blocked users correctly.
+- Existing models using `Hootlex\Friendships\Traits\Friendable`
+- New models using `PixelError\Friendships\Traits\Friendable`
+- Friendship creation
+- Friend request acceptance
+- Friend request denial
+- Blocking and unblocking
+- Friendship groups
+- Status constants through both namespaces
+- Service provider loading
 
 ---
 
 ## Status
 
-This release has been modernized for Laravel 12 and Laravel 13 compatibility.
+This is a backwards compatibility release.
 
-Full production testing is still recommended before relying on it in a live application.
+The goal is to make migration from the original namespace easier while keeping the maintained fork usable for modern Laravel 12 and Laravel 13 projects.
+
+New applications should use the `PixelError\Friendships` namespace.
+Existing applications may continue using the `Hootlex\Friendships` namespace during migration.
