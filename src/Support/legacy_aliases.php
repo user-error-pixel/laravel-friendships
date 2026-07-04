@@ -34,6 +34,7 @@ if (! class_exists('Hootlex\\Friendships\\Models\\Friendship', false)) {
     );
 }
 
+<<<<<<< HEAD
 if (! class_exists('Hootlex\\Friendships\\Models\\FriendshipGroup', false)) {
     class_alias(
         PixelError\Friendships\Models\FriendshipGroup::class,
