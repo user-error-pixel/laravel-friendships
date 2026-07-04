@@ -20,9 +20,9 @@ abstract class TestCase extends BaseTestCase
     {
         $app['config']->set('database.default', 'testing');
         $app['config']->set('database.connections.testing', [
-            'driver' => 'sqlite',
+            'driver'   => 'sqlite',
             'database' => ':memory:',
-            'prefix' => '',
+            'prefix'   => '',
         ]);
 
         $app['config']->set('friendships.tables.fr_pivot', 'friendships');
@@ -30,7 +30,7 @@ abstract class TestCase extends BaseTestCase
         $app['config']->set('friendships.groups', [
             'acquaintances' => 0,
             'close_friends' => 1,
-            'family' => 2,
+            'family'        => 2,
         ]);
     }
 

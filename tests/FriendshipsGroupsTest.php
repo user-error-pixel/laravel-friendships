@@ -14,7 +14,6 @@ class FriendshipsGroupsTest extends TestCase
     #[Test]
     public function user_can_add_a_friend_to_a_group()
     {
-
         $sender = createUser();
         $recipient = createUser();
 
@@ -33,7 +32,6 @@ class FriendshipsGroupsTest extends TestCase
 
         $this->assertEquals($recipient->id, $sender->getFriends(0, 'family')->first()->id);
         $this->assertEquals($sender->id, $recipient->getFriends(0, 'acquaintances')->first()->id);
-
     }
 
     /** @test */
@@ -110,14 +108,12 @@ class FriendshipsGroupsTest extends TestCase
         $recipients = createUser([], 10);
 
         foreach ($recipients as $key => $recipient) {
-
             $sender->befriend($recipient);
             $recipient->acceptFriendRequest($sender);
 
             if ($key % 2 === 0) {
                 $sender->groupFriend($recipient, 'family');
             }
-
         }
 
         $this->assertCount(5, $sender->getFriends(0, 'family'));
@@ -132,22 +128,18 @@ class FriendshipsGroupsTest extends TestCase
         $recipients = createUser([], 5);
 
         foreach ($recipients as $key => $recipient) {
-
             $sender->befriend($recipient);
 
             if ($key < 4) {
-
                 $recipient->acceptFriendRequest($sender);
                 if ($key < 3) {
                     $sender->groupFriend($recipient, 'acquaintances');
                 } else {
                     $sender->groupFriend($recipient, 'family');
                 }
-
             } else {
                 $recipient->denyFriendRequest($sender);
             }
-
         }
 
         // Assertions
@@ -177,7 +169,6 @@ class FriendshipsGroupsTest extends TestCase
         $sender->groupFriend($recipients[1], 'family');
 
         $this->assertCount(2, $sender->getAcceptedFriendships('family'));
-
     }
 
     /** @test */

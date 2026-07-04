@@ -22,7 +22,7 @@ class Friendship extends Model
     /**
      * Create a new friendship model instance.
      *
-     * @param  array<string, mixed>  $attributes
+     * @param array<string, mixed> $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -61,7 +61,7 @@ class Friendship extends Model
     public function fillRecipient(Model $recipient): static
     {
         return $this->fill([
-            'recipient_id' => $recipient->getKey(),
+            'recipient_id'   => $recipient->getKey(),
             'recipient_type' => $recipient->getMorphClass(),
         ]);
     }
