@@ -7,11 +7,7 @@ You can build friend requests, accepted friendships, blocks, and friend groups.
 
 | Package version | PHP | Laravel / Illuminate |
 | --- | --- | --- |
-<<<<<<< HEAD
-| Current | `^8.2` | `^12.0 \|\| ^13.0` |
-=======
 | Current | `^8.2` | `^12.0` || ^13.0` |
->>>>>>> 32f48a81a50a2d5492c417310dbe1a1c9f865d4b
 
 > Laravel 12 supports PHP 8.2+, while Laravel 13 requires PHP 8.3+. Composer will automatically resolve compatible versions based on your project.
 
