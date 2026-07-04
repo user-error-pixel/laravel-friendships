@@ -70,7 +70,7 @@ This package is useful for social platforms, gaming communities, forums, dashboa
 
 | Package Version | PHP | Laravel / Illuminate |
 | --- | --- | --- |
-| Current | `^8.2` | `^12.0 || ^13.0` |
+| Current | `^8.2` | `^12.0 \|\| ^13.0` |
 
 > Laravel 12 supports PHP 8.2+. Laravel 13 requires PHP 8.3+. Composer will automatically resolve compatible versions based on your project.
 
