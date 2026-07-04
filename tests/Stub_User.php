@@ -13,7 +13,10 @@ use PixelError\Friendships\Traits\Friendable;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, Friendable;
+    use Authenticatable;
+    use Authorizable;
+    use CanResetPassword;
+    use Friendable;
 
     /**
      * The database table used by the model.

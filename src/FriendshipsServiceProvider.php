@@ -19,14 +19,14 @@ class FriendshipsServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (! $this->app->runningInConsole()) {
+        if (!$this->app->runningInConsole()) {
             return;
         }
 
         $timestamp = date('Y_m_d_His');
 
         $this->publishes([
-            __DIR__.'/database/migrations/create_friendships_table.php' => database_path("migrations/{$timestamp}_create_friendships_table.php"),
+            __DIR__.'/database/migrations/create_friendships_table.php'        => database_path("migrations/{$timestamp}_create_friendships_table.php"),
             __DIR__.'/database/migrations/create_friendships_groups_table.php' => database_path('migrations/'.date('Y_m_d_His', strtotime('+1 second')).'_create_friendships_groups_table.php'),
         ], 'friendships-migrations');
 

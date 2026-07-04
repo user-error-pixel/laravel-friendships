@@ -22,11 +22,11 @@ trait Friendable
      */
     public function befriend(Model $recipient): Friendship|false
     {
-        if (! $this->canBefriend($recipient)) {
+        if (!$this->canBefriend($recipient)) {
             return false;
         }
 
-        $friendship = (new Friendship)->fillRecipient($recipient)->fill([
+        $friendship = (new Friendship())->fillRecipient($recipient)->fill([
             'status' => Status::PENDING,
         ]);
 
@@ -124,15 +124,15 @@ trait Friendable
 
         $groupsAvailable = config('friendships.groups', []);
 
-        if (! isset($groupsAvailable[$groupSlug]) || ! $friendship instanceof Friendship) {
+        if (!isset($groupsAvailable[$groupSlug]) || !$friendship instanceof Friendship) {
             return false;
         }
 
         $group = $friendship->groups()->firstOrCreate([
             'friendship_id' => $friendship->id,
-            'group_id' => $groupsAvailable[$groupSlug],
-            'friend_id' => $friend->getKey(),
-            'friend_type' => $friend->getMorphClass(),
+            'group_id'      => $groupsAvailable[$groupSlug],
+            'friend_id'     => $friend->getKey(),
+            'friend_type'   => $friend->getMorphClass(),
         ]);
 
         return $group->wasRecentlyCreated;
@@ -146,14 +146,14 @@ trait Friendable
         $friendship = $this->findFriendship($friend)->first();
         $groupsAvailable = config('friendships.groups', []);
 
-        if (! $friendship instanceof Friendship) {
+        if (!$friendship instanceof Friendship) {
             return false;
         }
 
         $where = [
             'friendship_id' => $friendship->id,
-            'friend_id' => $friend->getKey(),
-            'friend_type' => $friend->getMorphClass(),
+            'friend_id'     => $friend->getKey(),
+            'friend_type'   => $friend->getMorphClass(),
         ];
 
         if ($groupSlug !== '' && isset($groupsAvailable[$groupSlug])) {
@@ -168,11 +168,11 @@ trait Friendable
      */
     public function blockFriend(Model $recipient): Friendship
     {
-        if (! $this->isBlockedBy($recipient)) {
+        if (!$this->isBlockedBy($recipient)) {
             $this->findFriendship($recipient)->delete();
         }
 
-        $friendship = (new Friendship)->fillRecipient($recipient)->fill([
+        $friendship = (new Friendship())->fillRecipient($recipient)->fill([
             'status' => Status::BLOCKED,
         ]);
 
