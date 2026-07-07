@@ -11,10 +11,6 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Alex Kyriakidis",
-            "email": "hootlex@icloud.com"
-        },
-        {
             "name": "Nicholas English",
             "email": "nenglish443@gmail.com"
         }
@@ -37,10 +33,7 @@
     "autoload": {
         "psr-4": {
             "PixelError\\Friendships\\": "src/"
-        },
-        "files": [
-            "src/Support/legacy_aliases.php"
-        ]
+        }
     },
     "autoload-dev": {
         "files": [

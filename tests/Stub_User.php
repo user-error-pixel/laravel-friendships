@@ -9,33 +9,21 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\Authorizable;
-use PixelError\Friendships\Traits\Friendable;
+use PixelError\Friendships\Traits\HasFriendships;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
     use Authenticatable;
     use Authorizable;
     use CanResetPassword;
-    use Friendable;
+    use HasFriendships;
 
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
+    /** @var string $table The database table used by the model. */
     protected $table = 'users';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    /** @var array $fillable The attributes that are mass assignable. */
     protected $fillable = ['name', 'email', 'password'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
+    /** @var array $hidden The attributes excluded from the model's JSON form. */
     protected $hidden = ['password', 'remember_token'];
 }

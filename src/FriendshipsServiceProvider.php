@@ -3,35 +3,47 @@
 namespace PixelError\Friendships;
 
 use Illuminate\Support\ServiceProvider;
+use PixelError\Friendships\Console\Commands\ExpireFriendRequestsCommand;
 
 class FriendshipsServiceProvider extends ServiceProvider
 {
     /**
-     * Register package services.
-     */
-    public function register(): void
-    {
-        $this->mergeConfigFrom(__DIR__.'/config/friendships.php', 'friendships');
-    }
-
-    /**
-     * Bootstrap package services.
+     * Bootstrap any package services.
+     *
+     * @return void Returns nothing.
      */
     public function boot(): void
     {
-        if (! $this->app->runningInConsole()) {
-            return;
+        // Ensure we are running in the console before publishing migrations and configuration files.
+        if ($this->app->runningInConsole()) {
+
+            // Register the console command for expiring friend requests.
+            $this->commands([
+                ExpireFriendRequestsCommand::class,
+            ]);
+
+            // Publish the package migrations to the application's migrations directory.
+            $this->publishesMigrations([
+                __DIR__.'/../database/migrations/' => database_path('migrations'),
+            ], 'friendships-migrations');
+
+            // Publish the package configuration file to the application's config directory.
+            $this->publishes([
+                __DIR__.'/../config/friendships.php' => config_path('friendships.php'),
+            ], 'friendships-config');
         }
+        // Load the package routes from the specified file.
+        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+    }
 
-        $timestamp = date('Y_m_d_His');
-
-        $this->publishes([
-            __DIR__.'/database/migrations/create_friendships_table.php' => database_path("migrations/{$timestamp}_create_friendships_table.php"),
-            __DIR__.'/database/migrations/create_friendships_groups_table.php' => database_path('migrations/'.date('Y_m_d_His', strtotime('+1 second')).'_create_friendships_groups_table.php'),
-        ], 'friendships-migrations');
-
-        $this->publishes([
-            __DIR__.'/config/friendships.php' => config_path('friendships.php'),
-        ], 'friendships-config');
+    /**
+     * Register any package services.
+     *
+     * @return void Returns nothing.
+     */
+    public function register(): void
+    {
+        // Merge the package configuration with the application's configuration.
+        $this->mergeConfigFrom(__DIR__.'/../config/friendships.php', 'friendships');
     }
 }

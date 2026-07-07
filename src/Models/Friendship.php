@@ -2,126 +2,57 @@
 
 namespace PixelError\Friendships\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Represents a friendship relationship between two Eloquent models.
+ * Represents a friendship relationship between two models.
  */
 class Friendship extends Model
 {
-    /**
-     * The attributes that are not mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    /** @var list<string> The attributes that are mass assignable. */
+    protected $fillable = [
+        'sender_id',
+        'recipient_id',
+        'pair_key',
+        'status',
+        'accepted_at',
+        'expires_at',
+    ];
+
+    /** @var array<string, string> The attributes that should be cast. */
+    protected $casts = [
+        'accepted_at' => 'datetime',
+        'expires_at' => 'datetime',
+    ];
 
     /**
-     * Create a new friendship model instance.
+     * Get the table name for the friendship model.
      *
-     * @param  array<string, mixed>  $attributes
+     * @return string Returns the table name.
      */
-    public function __construct(array $attributes = [])
+    public function getTable(): string
     {
-        $this->table = config('friendships.tables.fr_pivot');
-
-        parent::__construct($attributes);
+        return config('friendships.tables.friendships', 'friendships');
     }
 
     /**
      * Get the model that sent the friendship request.
+     *
+     * @return BelongsTo Returns the sender relationship.
      */
-    public function sender(): MorphTo
+    public function sender(): BelongsTo
     {
-        return $this->morphTo('sender');
+        return $this->belongsTo(config('auth.providers.users.model'), 'sender_id');
     }
 
     /**
-     * Get the model that received the friendship request.
+     * Get the user who received the friend request.
+     *
+     * @return BelongsTo Returns the recipient relationship.
      */
-    public function recipient(): MorphTo
+    public function recipient(): BelongsTo
     {
-        return $this->morphTo('recipient');
-    }
-
-    /**
-     * Get the group records attached to this friendship.
-     */
-    public function groups(): HasMany
-    {
-        return $this->hasMany(FriendshipGroup::class, 'friendship_id');
-    }
-
-    /**
-     * Fill the recipient morph columns for the given model.
-     */
-    public function fillRecipient(Model $recipient): static
-    {
-        return $this->fill([
-            'recipient_id' => $recipient->getKey(),
-            'recipient_type' => $recipient->getMorphClass(),
-        ]);
-    }
-
-    /**
-     * Scope the query to friendships received by the given model.
-     */
-    public function scopeWhereRecipient(Builder $query, Model $model): Builder
-    {
-        return $query->where('recipient_id', $model->getKey())
-            ->where('recipient_type', $model->getMorphClass());
-    }
-
-    /**
-     * Scope the query to friendships sent by the given model.
-     */
-    public function scopeWhereSender(Builder $query, Model $model): Builder
-    {
-        return $query->where('sender_id', $model->getKey())
-            ->where('sender_type', $model->getMorphClass());
-    }
-
-    /**
-     * Scope the query to a friendship group owned by the given model.
-     */
-    public function scopeWhereGroup(Builder $query, Model $model, string $groupSlug = ''): Builder
-    {
-        $groupsPivotTable = config('friendships.tables.fr_groups_pivot');
-        $friendsPivotTable = config('friendships.tables.fr_pivot');
-        $groupsAvailable = config('friendships.groups', []);
-
-        if ($groupSlug !== '' && isset($groupsAvailable[$groupSlug])) {
-            $groupId = $groupsAvailable[$groupSlug];
-
-            $query->join($groupsPivotTable, function ($join) use ($groupsPivotTable, $friendsPivotTable, $groupId, $model): void {
-                $join->on($groupsPivotTable.'.friendship_id', '=', $friendsPivotTable.'.id')
-                    ->where($groupsPivotTable.'.group_id', '=', $groupId)
-                    ->where(function ($query) use ($groupsPivotTable, $model): void {
-                        $query->where(function ($query) use ($groupsPivotTable, $model): void {
-                            $query->where($groupsPivotTable.'.friend_id', '!=', $model->getKey())
-                                ->where($groupsPivotTable.'.friend_type', '=', $model->getMorphClass());
-                        })->orWhere($groupsPivotTable.'.friend_type', '!=', $model->getMorphClass());
-                    });
-            });
-        }
-
-        return $query;
-    }
-
-    /**
-     * Scope the query to the relationship between two models in either direction.
-     */
-    public function scopeBetweenModels(Builder $query, Model $sender, Model $recipient): Builder
-    {
-        return $query->where(function (Builder $queryIn) use ($sender, $recipient): void {
-            $queryIn->where(function (Builder $q) use ($sender, $recipient): void {
-                $q->whereSender($sender)->whereRecipient($recipient);
-            })->orWhere(function (Builder $q) use ($sender, $recipient): void {
-                $q->whereSender($recipient)->whereRecipient($sender);
-            });
-        });
+        return $this->belongsTo(config('auth.providers.users.model'), 'recipient_id');
     }
 }

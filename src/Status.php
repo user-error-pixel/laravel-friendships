@@ -3,15 +3,21 @@
 namespace PixelError\Friendships;
 
 /**
- * Friendship status values.
+ * Class Status
+ *
+ * Represents the possible statuses of a friendship.
  */
 class Status
 {
-    public const PENDING = 0;
+    public const PENDING = 'pending';
 
-    public const ACCEPTED = 1;
+    public const ACCEPTED = 'accepted';
 
-    public const DENIED = 2;
+    public const DENIED = 'denied';
 
-    public const BLOCKED = 3;
+    public const BLOCKED = 'blocked';
+
+    public const CANCELED = 'canceled';
+
+    public const EXPIRED = 'expired';
 }
